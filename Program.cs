@@ -4,9 +4,9 @@ var mathGame = new MathGame();
 
 var gameOver = false;
 int selection;
-int result;
-int firstNumber = -1;
-int secondNumber = -1;
+double result;
+double firstNumber = -1;
+double secondNumber = -1;
 
 while (!gameOver)
 {
@@ -32,27 +32,27 @@ while (!gameOver)
     if (selection < 5)
     {
 
-        Console.WriteLine("Please enter the first integer number");
+        Console.WriteLine("Please enter the first number");
         while (firstNumber < 0)
         {
             try
             {
-                firstNumber = Convert.ToInt32(Console.ReadLine());
+                firstNumber = Double.Parse(Console.ReadLine());
             }
             catch (Exception)
             {
 
-                Console.WriteLine("Please Enter a Valid Integer Number:");
+                Console.WriteLine("Please Enter a Valid Number:");
             }
         }
 
-        Console.WriteLine("Please enter the second integer number");
+        Console.WriteLine("Please enter the second number");
 
         while (secondNumber < 0)
         {
             try
             {       
-                secondNumber = Convert.ToInt32(Console.ReadLine());
+                secondNumber = Double.Parse(Console.ReadLine());
             }
             catch (Exception)
             {
@@ -79,8 +79,15 @@ while (!gameOver)
             Console.WriteLine("\n");
             break;
         case 4:
-            result = mathGame.DivisionOperation(firstNumber, secondNumber);
-            Console.WriteLine($"{firstNumber} / {secondNumber} = {result}\n\n");
+            result = mathGame.DivisionOperation((int)firstNumber, (int)secondNumber);
+            if(result != int.MaxValue)
+            {
+                Console.WriteLine($"{firstNumber} / {secondNumber} = {(int) result}\n\n");
+            }
+            else
+            {
+                Console.WriteLine("The result was not an integer.");
+            }
             Console.WriteLine("\n");
             break;
         case 5:

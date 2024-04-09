@@ -11,19 +11,19 @@ namespace Game
 
         public List<string> RecordOfOperations { get; set; } = new List<string>();
 
-        public int SummationOperation(int a, int b)
+        public double SummationOperation(double a, double b)
         {
             RecordOfOperations.Add($"{a} + {b} = {a + b}");
             return a + b;
         }
 
-        public int SubtractionOperation(int a, int b)
+        public double SubtractionOperation(double a, double b)
         {
             RecordOfOperations.Add($"{a} - {b} = {a - b}");
             return a - b;
         }
 
-        public int MultiplicationOperation(int a, int b)
+        public double MultiplicationOperation(double a, double b)
         {
             RecordOfOperations.Add($"{a} * {b} = {a * b}");
             return a * b;
@@ -37,8 +37,16 @@ namespace Game
                 a = Convert.ToInt32(Console.ReadLine());
             }
 
-            RecordOfOperations.Add($"{a} / {b} = {a / b}");
-            return a / b;
+            if (a % b != 0)
+            {
+                // don't show anything since division resulted in a floating point value
+                return int.MaxValue;
+            }
+            else
+            {
+                RecordOfOperations.Add($"{a} / {b} = {a / b}");
+                return a / b;
+            }
         }
 
 
