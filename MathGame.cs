@@ -17,7 +17,7 @@ namespace Game
             return a + b;
         }
 
-        public int SubstractionOperation(int a, int b)
+        public int SubtractionOperation(int a, int b)
         {
             RecordOfOperations.Add($"{a} - {b} = {a - b}");
             return a - b;
@@ -31,24 +31,13 @@ namespace Game
 
         public int DivisionOperation(int a, int b)
         {
-
-
-            var invalid = true;
-            while (invalid)
+            while (a < 0 || a > 100)
             {
-                if (a < 0 || a > 100)
-                {
-                    Console.WriteLine("Please Enter a valid dividend, valid values are from 0 - 100");
-                    a = Convert.ToInt32(Console.ReadLine());
-                }
-                else 
-                {
-                    invalid = false;
-                }
+                Console.WriteLine("Please Enter a valid dividend, valid values are from 0 - 100");
+                a = Convert.ToInt32(Console.ReadLine());
             }
 
             RecordOfOperations.Add($"{a} / {b} = {a / b}");
-
             return a / b;
         }
 
@@ -56,8 +45,8 @@ namespace Game
         public void DisplayMenu()
         {
             Console.WriteLine("Welcome to the Math Game");
-            Console.WriteLine("1) Sumation Operation");
-            Console.WriteLine("2) Substraction Operation");
+            Console.WriteLine("1) Summation Operation");
+            Console.WriteLine("2) Subtraction Operation");
             Console.WriteLine("3) Multiplication Operation");
             Console.WriteLine("4) Division Operation");
             Console.WriteLine("5) Show Past Operations");
