@@ -41,34 +41,17 @@ while (!gameOver)
             userResponse = GetUserResponse();
             Console.WriteLine($"The correct result is: ");
             Console.WriteLine($"{firstNumber} + {secondNumber} = {result}");
-            if (userResponse == result)
-            {
-                Console.WriteLine("You answer correctly; You earned 5 pts.");
-                score += 5;
-            }
-            else
-            {
-                Console.WriteLine($"Try again");
-            }
-
+            score = validateResult(result, userResponse, score);
             Console.WriteLine("\n");
             break;
         case 2:
             Console.WriteLine($"{firstNumber} - {secondNumber} = ??");
             result = mathGame.SubtractionOperation(firstNumber, secondNumber);
             userResponse = GetUserResponse();
+
             Console.WriteLine($"The correct result is: ");
             Console.WriteLine($"{firstNumber} - {secondNumber} = {result}");
-            if (userResponse == result)
-            {
-                Console.WriteLine("You answer correctly; You earned 5 pts.");
-                score += 5;
-            }
-            else
-            {
-                Console.WriteLine($"Try again");
-            }
-
+            score = validateResult(result, userResponse, score);
             Console.WriteLine("\n");
             break;
         case 3:
@@ -77,15 +60,7 @@ while (!gameOver)
             userResponse = GetUserResponse();
             Console.WriteLine($"The correct result is: ");
             Console.WriteLine($"{firstNumber} * {secondNumber} = {result}");
-            if (userResponse == result)
-            {
-                Console.WriteLine("You answer correctly; You earned 5 pts.");
-                score += 5;
-            }
-            else
-            {
-                Console.WriteLine($"Try again");
-            }
+            score = validateResult(result, userResponse, score);
 
             Console.WriteLine("\n");
             break;
@@ -97,15 +72,7 @@ while (!gameOver)
                 userResponse = GetUserResponse();
                 Console.WriteLine($"The correct result is: ");
                 Console.WriteLine($"{firstNumber} / {secondNumber} = {result}");
-                if (userResponse == result)
-                {
-                    Console.WriteLine("You answer correctly; You earned 5 pts.");
-                    score += 5;
-                }
-                else
-                {
-                    Console.WriteLine($"Try again");
-                }
+                score = validateResult(result, userResponse, score);
             }
             else
             {
@@ -153,3 +120,19 @@ static int GetUserResponse()
 }
 
 Console.WriteLine("Thanks for playing this numbers game");
+
+static int validateResult(int result, int userResponse, int score)
+{
+    if (userResponse == result)
+    {
+        Console.WriteLine("You answer correctly; You earned 5 pts.");
+        score += 5;
+    }
+    else
+    {
+        Console.WriteLine($"Try again");
+        score += 0;
+    }
+
+    return score;
+}
