@@ -4,9 +4,12 @@ var mathGame = new MathGame();
 
 var gameOver = false;
 int selection;
-double result;
-double firstNumber = -1;
-double secondNumber = -1;
+int result;
+int firstNumber;
+int secondNumber;
+int userResponse;
+int score = 0;
+Random random = new Random();
 
 while (!gameOver)
 {
@@ -14,7 +17,7 @@ while (!gameOver)
 
     firstNumber = -1;
     secondNumber = -1;
-    
+
     try
     {
         selection = Convert.ToInt32(Console.ReadLine());
@@ -27,62 +30,82 @@ while (!gameOver)
         Console.WriteLine("\n");
     }
 
-
-    // Ask for numbers to do operations with
-    if (selection < 5)
-    {
-
-        Console.WriteLine("Please enter the first number");
-        while (firstNumber < 0)
-        {
-            try
-            {
-                firstNumber = Double.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-
-                Console.WriteLine("Please Enter a Valid Number:");
-            }
-        }
-
-        Console.WriteLine("Please enter the second number");
-
-        while (secondNumber < 0)
-        {
-            try
-            {       
-                secondNumber = Double.Parse(Console.ReadLine());
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Please Enter a Valid Integer Number:");
-            }
-        }
-    }
+    firstNumber = random.Next(1, 101);
+    secondNumber = random.Next(1, 101);
 
     switch (selection)
     {
         case 1:
-            result =  mathGame.SummationOperation(firstNumber,secondNumber);
-            Console.WriteLine($"{firstNumber} + {secondNumber} = {result}\n\n");
+            Console.WriteLine($"{firstNumber} + {secondNumber} = ??");
+            result = mathGame.SummationOperation(firstNumber, secondNumber);
+            userResponse = GetUserResponse();
+            Console.WriteLine($"The correct result is: ");
+            Console.WriteLine($"{firstNumber} + {secondNumber} = {result}");
+            if (userResponse == result)
+            {
+                Console.WriteLine("You answer correctly; You earned 5 pts.");
+                score += 5;
+            }
+            else
+            {
+                Console.WriteLine($"Try again");
+            }
+
             Console.WriteLine("\n");
             break;
         case 2:
+            Console.WriteLine($"{firstNumber} - {secondNumber} = ??");
             result = mathGame.SubtractionOperation(firstNumber, secondNumber);
-            Console.WriteLine($"{firstNumber} - {secondNumber} = {result}\n\n");
+            userResponse = GetUserResponse();
+            Console.WriteLine($"The correct result is: ");
+            Console.WriteLine($"{firstNumber} - {secondNumber} = {result}");
+            if (userResponse == result)
+            {
+                Console.WriteLine("You answer correctly; You earned 5 pts.");
+                score += 5;
+            }
+            else
+            {
+                Console.WriteLine($"Try again");
+            }
+
             Console.WriteLine("\n");
             break;
         case 3:
+            Console.WriteLine($"{firstNumber} * {secondNumber} = ??");
             result = mathGame.MultiplicationOperation(firstNumber, secondNumber);
-            Console.WriteLine($"{firstNumber} * {secondNumber} = {result}\n\n");
+            userResponse = GetUserResponse();
+            Console.WriteLine($"The correct result is: ");
+            Console.WriteLine($"{firstNumber} * {secondNumber} = {result}");
+            if (userResponse == result)
+            {
+                Console.WriteLine("You answer correctly; You earned 5 pts.");
+                score += 5;
+            }
+            else
+            {
+                Console.WriteLine($"Try again");
+            }
+
             Console.WriteLine("\n");
             break;
         case 4:
-            result = mathGame.DivisionOperation((int)firstNumber, (int)secondNumber);
-            if(result != int.MaxValue)
+            Console.WriteLine($"{firstNumber} / {secondNumber} = ??");
+            result = mathGame.DivisionOperation(firstNumber, secondNumber);
+            if (result != int.MaxValue)
             {
-                Console.WriteLine($"{firstNumber} / {secondNumber} = {(int) result}\n\n");
+                userResponse = GetUserResponse();
+                Console.WriteLine($"The correct result is: ");
+                Console.WriteLine($"{firstNumber} / {secondNumber} = {result}");
+                if (userResponse == result)
+                {
+                    Console.WriteLine("You answer correctly; You earned 5 pts.");
+                    score += 5;
+                }
+                else
+                {
+                    Console.WriteLine($"Try again");
+                }
             }
             else
             {
@@ -93,6 +116,7 @@ while (!gameOver)
         case 5:
             Console.WriteLine("Previous Operations:");
             mathGame.RecordOfOperations.ForEach(Console.WriteLine);
+            Console.WriteLine($"Your total score is: {score}");
             Console.WriteLine("\n");
             break;
         case 6:
@@ -105,7 +129,27 @@ while (!gameOver)
             break;
     }
 
-    
+
+}
+
+static int GetUserResponse()
+{
+    int response = 0;
+    bool invalid = true;
+    Console.WriteLine("Please enter your response.");
+    while (invalid)
+    {
+        try
+        {
+            response = Convert.ToInt32(Console.ReadLine());
+            invalid = false;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Please enter a valid Integer Value");
+        }
+    }
+    return response;
 }
 
 Console.WriteLine("Thanks for playing this numbers game");

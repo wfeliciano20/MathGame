@@ -11,19 +11,19 @@ namespace Game
 
         public List<string> RecordOfOperations { get; set; } = new List<string>();
 
-        public double SummationOperation(double a, double b)
+        public int SummationOperation(int a, int b)
         {
             RecordOfOperations.Add($"{a} + {b} = {a + b}");
             return a + b;
         }
 
-        public double SubtractionOperation(double a, double b)
+        public int SubtractionOperation(int a, int b)
         {
             RecordOfOperations.Add($"{a} - {b} = {a - b}");
             return a - b;
         }
 
-        public double MultiplicationOperation(double a, double b)
+        public int MultiplicationOperation(int a, int b)
         {
             RecordOfOperations.Add($"{a} * {b} = {a * b}");
             return a * b;
